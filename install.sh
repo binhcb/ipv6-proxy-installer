@@ -6,7 +6,6 @@ WORKDIR="/home/proxy-installer"
 WORKDATA="$WORKDIR/data.txt"
 FIRST_PORT=10000
 
-### HÀM SINH NGẪU NHIÊN ###
 random() {
   tr </dev/urandom -dc A-Za-z0-9 | head -c5
   echo
