@@ -1,27 +1,16 @@
 #!/bin/bash
 set -e
 
-### CẤU HÌNH ###
-WORKDIR="/home/proxy-installer"
-WORKDATA="$WORKDIR/data.txt"
-FIRST_PORT=10000
-
-random() {
-  tr </dev/urandom -dc A-Za-z0-9 | head -c5
-  echo
-}
-
+random() { tr </dev/urandom -dc A-Za-z0-9 | head -c5; echo; }
 declare -a array=(0 1 2 3 4 5 6 7 8 9 a b c d e f)
 
-ip64() {
-  printf "%s%s%s%s" \
-    "${array[$RANDOM % 16]}" "${array[$RANDOM % 16]}" \
-    "${array[$RANDOM % 16]}" "${array[$RANDOM % 16]}"
-}
-
 gen64() {
+  ip64() { printf "%s%s%s%s" \
+    "${array[$RANDOM % 16]}" "${array[$RANDOM % 16]}" \
+    "${array[$RANDOM % 16]}" "${array[$RANDOM % 16]}"; }
   printf "%s:%s:%s:%s:%s\n" "$1" "$(ip64)" "$(ip64)" "$(ip64)" "$(ip64)"
 }
+
 
 install_3proxy() {
   echo "Đang cài đặt 3proxy..."
